@@ -14,6 +14,37 @@ class LinkedList {
     this.head = new _Node(item, this.head);
   }
 
+  insertBefore(newNode, target) {
+    if (this.head === null || this.head.value === target) {
+      this.insertFirst(newNode);
+    } else {
+      let tempNode = this.head;
+      let prevNode = this.head;
+      while (tempNode.next !== null && tempNode.value !== target) {
+        prevNode = tempNode;
+        tempNode = tempNode.next;
+      }
+
+      prevNode.next = new _Node(newNode, tempNode);
+    }
+  }
+
+  insertAfter(newNode, index) {
+    if (this.head === null) {
+      this.insertFirst(newNode);
+    } else {
+      let tempNode = this.head;
+      let prevNode = this.head;
+      let count = 0;
+      while (tempNode.next !== null && count < index) {
+        count++;
+        prevNode = tempNode;
+        tempNode = tempNode.next;
+      }
+      prevNode.next = new _Node(newNode, tempNode);
+    }
+  }
+
   insertLast(item) {
     if (this.head === null) {
       this.insertFirst(item);
@@ -81,13 +112,18 @@ class LinkedList {
 
 function main() {
   let SLL = new LinkedList();
-    SSL.insertFirst('Apollo');
-    SSL.insertFirst('Boomer');
-    SSL.insertFirst('Helo');
-    SSL.insertFirst('Husker');
-    SSL.insertFirst('Starbuck');
+  SSL.insertFirst("Apollo");
+  SSL.insertFirst("Boomer");
+  SSL.insertFirst("Helo");
+  SSL.insertFirst("Husker");
+  SSL.insertFirst("Starbuck");
 
-    SSl.insertFirst('Tauhida')
+  SSL.insertFirst("Tauhida");
+  SSL.remove("Husker");
+  SSL.insertBefore("Athena");
+  SSL.insertBefore("Boomer");
+
+  SSL.remove("Tauhida");
 }
 
 main();
